@@ -20,10 +20,12 @@
     <!-- 1. Wake Me Up -->
     <section class="screen" id="screen-1">
       <div class="center">
+        <h2 class="intro-title">For My Chinie 💕</h2>
+        <p class="intro-subtitle">Tap to wake me up...</p>
         <div id="sleepy" class="character sleeping" role="button" tabindex="0" aria-label="Wake me up">
           <div class="face">😴</div>
         </div>
-        <div id="wakeText" class="small-msg hidden">I'm awake now... and I'm sorry. — Babi</div>
+        <div id="wakeText" class="small-msg hidden">I'm awake now... and I'm sorry, Babi. 🥺</div>
         <button id="next1" class="btn hidden">Next ❤️</button>
       </div>
     </section>
@@ -31,11 +33,12 @@
     <!-- 2. Drag-to-Reveal -->
     <section class="screen hidden" id="screen-2">
       <div class="center">
-        <h2>Slide to reveal my apology</h2>
+        <h2>Slide to reveal my apology 💌</h2>
+        <p class="hint-text">Drag the slider all the way →</p>
         <div class="slider-wrap">
           <input type="range" id="apologySlider" min="0" max="100" value="0">
         </div>
-        <p id="apologyText" class="apology-text hidden">Sorry for oversleeping and making you wait, Chinie. I love you — Babi.</p>
+        <p id="apologyText" class="apology-text hidden">Sorry for oversleeping and making you wait, Chinie. You mean the world to me, and I never want to let you down again. I love you so much. — Your Babi 💕</p>
         <button id="next2" class="btn hidden">Next</button>
       </div>
     </section>
@@ -47,6 +50,91 @@
         <div id="heartField" class="heart-field" aria-live="polite"></div>
         <div class="game-info">Popped: <span id="poppedCount">0</span>/5</div>
         <button id="next3" class="btn hidden">Next</button>
+      </div>
+    </section>
+
+    <!-- 3.5. Photo Memory -->
+    <section class="screen hidden" id="screen-3-5">
+      <div class="center">
+        <h2>Our Memories 💕</h2>
+        <div class="photo-frame">
+          <div class="polaroid" id="polaroid">
+            <div class="photo">👫</div>
+            <div class="caption">Us ❤️</div>
+          </div>
+        </div>
+        <p class="romantic-text">Every moment with you is precious, Chinie.</p>
+        <p class="romantic-text small">Click the photo 3 times to see it transform! ✨</p>
+        <button id="next35" class="btn">Continue</button>
+      </div>
+    </section>
+
+    <!-- 3.6. Promise Maker -->
+    <section class="screen hidden" id="screen-3-6">
+      <div class="center">
+        <h2>My Promise to You 🌹</h2>
+        <div class="promise-container">
+          <div class="promise-item" data-promise="1">I promise to always be there for you</div>
+          <div class="promise-item" data-promise="2">I promise to never oversleep on important days</div>
+          <div class="promise-item" data-promise="3">I promise to make you smile every day</div>
+          <div class="promise-item" data-promise="4">I promise to love you more each day</div>
+        </div>
+        <div id="promiseMsg" class="promise-msg hidden">Thank you for believing in me, Chinie 💖</div>
+        <button id="next36" class="btn hidden">Continue</button>
+      </div>
+    </section>
+
+    <!-- 3.7. Love Calculator -->
+    <section class="screen hidden" id="screen-3-7">
+      <div class="center">
+        <h2>Love Calculator 💘</h2>
+        <div class="calculator-display">
+          <div class="calc-line">Babi + Chinie = <span id="loveResult">?</span></div>
+        </div>
+        <button id="calculateBtn" class="btn">Calculate Our Love</button>
+        <div id="calcMessage" class="calc-message hidden"></div>
+        <button id="next37" class="btn hidden">Next</button>
+      </div>
+    </section>
+
+    <!-- 3.8. Photo Gallery Intro -->
+    <section class="screen hidden" id="screen-3-8">
+      <div class="center">
+        <h2>Candid Moments 📸</h2>
+        <p class="romantic-text">All the times I caught you being adorably you...</p>
+        <p class="romantic-text small">Bloopers, stolen shots, and precious moments 💕</p>
+        <button id="startGallery" class="btn">Show Me The Photos ✨</button>
+      </div>
+    </section>
+
+    <!-- 3.9. Romantic Slideshow -->
+    <section class="screen hidden" id="screen-3-9">
+      <div class="center slideshow-container">
+        <h2>Every Photo Tells Our Story 💕</h2>
+        <div class="slideshow-frame">
+          <div class="slide-photo" id="slidePhoto">
+            <div class="photo-placeholder">📷</div>
+            <img id="currentSlide" class="hidden" alt="Our memory">
+          </div>
+          <div class="slide-caption" id="slideCaption">Loading memories...</div>
+        </div>
+        <div class="slideshow-controls">
+          <button class="slide-btn" id="prevSlide">← Prev</button>
+          <span id="slideCounter">1 / 1</span>
+          <button class="slide-btn" id="nextSlide">Next →</button>
+        </div>
+        <button id="next39" class="btn">Continue to Gallery</button>
+      </div>
+    </section>
+
+    <!-- 3.10. Photo Grid Gallery -->
+    <section class="screen hidden" id="screen-3-10">
+      <div class="center gallery-container">
+        <h2>All Our Precious Moments 💖</h2>
+        <div class="photo-grid" id="photoGrid">
+          <!-- Photos will be dynamically inserted here -->
+        </div>
+        <button id="next310" class="btn">Continue Journey</button>
       </div>
     </section>
 

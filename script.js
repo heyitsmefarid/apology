@@ -32,10 +32,16 @@ sleepy.addEventListener('keypress', (e)=> { if(e.key==='Enter') wakeUp(); });
 function wakeUp(){
   sleepy.classList.remove('sleeping');
   sleepy.classList.add('awake');
-  document.querySelector('.face').textContent = '😊';
-  wakeText.classList.add('visible'); // Use visible class for transition
+  const face = document.querySelector('.face');
+  
+  // Animate wake up
+  face.textContent = '😪';
+  setTimeout(()=> face.textContent = '🙂', 300);
+  setTimeout(()=> face.textContent = '😊', 600);
+  
+  wakeText.classList.add('visible');
   wakeText.classList.remove('hidden');
-  setTimeout(()=> next1.classList.remove('hidden'), 400);
+  setTimeout(()=> next1.classList.remove('hidden'), 800);
 }
 next1.addEventListener('click', ()=> show('screen-2'));
 
@@ -49,7 +55,7 @@ slider.addEventListener('input', ()=>{
     typed = true;
     apologyText.classList.add('visible');
     apologyText.classList.remove('hidden');
-    typeWriter(apologyText, "Sorry for oversleeping and making you wait, Chinie. I love you — Babi.", 50);
+    typeWriter(apologyText, "Sorry for oversleeping and making you wait, Chinie. You mean the world to me, and I never want to let you down again. I love you so much. — Your Babi 💕", 40);
     next2.classList.remove('hidden');
   }
 });
@@ -121,7 +127,256 @@ function stopHearts(){ clearInterval(heartSpawner); }
 
 // Removed MutationObserver in favor of direct calls in show()
 
-next3.addEventListener('click', ()=> show('screen-4'));
+next3.addEventListener('click', ()=> show('screen-3-5'));
+
+// --- Screen 3.5: Photo Memory ---
+const next35 = document.getElementById('next35');
+const polaroid = document.getElementById('polaroid');
+let photoClicks = 0;
+
+if(polaroid) {
+  polaroid.addEventListener('click', ()=>{
+    photoClicks++;
+    if(photoClicks === 1) {
+      polaroid.style.transform = 'rotate(5deg) scale(1.1)';
+      setTimeout(()=> polaroid.style.transform = 'rotate(-5deg) scale(1.1)', 200);
+    } else if(photoClicks === 2) {
+      polaroid.querySelector('.photo').textContent = '💖';
+    } else if(photoClicks >= 3) {
+      polaroid.querySelector('.photo').textContent = '😘💋';
+      polaroid.querySelector('.caption').textContent = 'Forever ❤️';
+    }
+  });
+}
+
+if(next35) next35.addEventListener('click', ()=> show('screen-3-6'));
+
+// --- Screen 3.6: Promise Maker ---
+const promiseItems = document.querySelectorAll('.promise-item');
+const promiseMsg = document.getElementById('promiseMsg');
+const next36 = document.getElementById('next36');
+let checkedPromises = 0;
+
+promiseItems.forEach(item => {
+  item.addEventListener('click', ()=>{
+    if(!item.classList.contains('checked')){
+      item.classList.add('checked');
+      checkedPromises++;
+      
+      if(checkedPromises >= 4){
+        if(promiseMsg) promiseMsg.classList.remove('hidden');
+        if(next36) next36.classList.remove('hidden');
+      }
+    }
+  });
+});
+
+if(next36) next36.addEventListener('click', ()=> show('screen-3-7'));
+
+// --- Screen 3.7: Love Calculator ---
+const calculateBtn = document.getElementById('calculateBtn');
+const loveResult = document.getElementById('loveResult');
+const calcMessage = document.getElementById('calcMessage');
+const next37 = document.getElementById('next37');
+
+if(calculateBtn) {
+  calculateBtn.addEventListener('click', ()=>{
+    let percentage = 0;
+    const interval = setInterval(()=>{
+      percentage += Math.floor(Math.random() * 15) + 5;
+      if(percentage >= 100){
+        clearInterval(interval);
+        percentage = 100;
+        if(loveResult) loveResult.textContent = percentage + '%';
+        
+        setTimeout(()=>{
+          if(loveResult) loveResult.textContent = '∞%';
+          if(calcMessage) {
+            calcMessage.textContent = 'Our love is infinite! 💕💖💗';
+            calcMessage.classList.remove('hidden');
+          }
+          if(next37) next37.classList.remove('hidden');
+        }, 500);
+      } else {
+        if(loveResult) loveResult.textContent = percentage + '%';
+      }
+    }, 100);
+    
+    calculateBtn.disabled = true;
+    calculateBtn.style.opacity = '0.5';
+  });
+}
+
+if(next37) next37.addEventListener('click', ()=> show('screen-3-8'));
+
+// --- Screen 3.8: Photo Gallery Intro ---
+const startGallery = document.getElementById('startGallery');
+if(startGallery) {
+  startGallery.addEventListener('click', ()=> {
+    loadPhotos();
+    show('screen-3-9');
+  });
+}
+
+// --- Photo Gallery System ---
+let photos = [];
+let currentPhotoIndex = 0;
+
+// Candid/blooper captions
+const romanticCaptions = [
+  "Caught you being adorable 🥰",
+  "When you didn't know I was watching 😊",
+  "This blooper moment 😂💕",
+  "Candid cuteness 📸",
+  "Stolen shot but worth it ❤️",
+  "You being naturally beautiful ✨",
+  "Unfiltered perfection 💖",
+  "My favorite blooper 😘",
+  "Just you being you 💕",
+  "Caught in the moment 📷",
+  "This smile though 😍",
+  "Naturally stunning 🌟",
+  "Real and beautiful 💗",
+  "Candid magic ✨",
+  "Behind the scenes cuteness 💞"
+];
+
+function loadPhotos() {
+  photos = [];
+  
+  // Load photos 1-40.jpg from pictures folder
+  for(let i = 1; i <= 40; i++) {
+    const path = `pictures/${i}.jpg`;
+    const img = new Image();
+    
+    img.onload = function() {
+      photos.push({
+        type: 'image',
+        content: path,
+        caption: romanticCaptions[Math.floor(Math.random() * romanticCaptions.length)],
+        index: i
+      });
+      
+      // Shuffle photos for random display
+      photos = photos.sort(() => Math.random() - 0.5);
+      
+      // Update display if we're on slideshow screen
+      if(photos.length === 1) {
+        showSlide(0);
+      }
+    };
+    
+    img.onerror = function() {
+      console.log(`Photo ${i}.jpg not found, skipping...`);
+    };
+    
+    img.src = path;
+  }
+  
+  // If no photos load after a delay, show a fallback message
+  setTimeout(() => {
+    if(photos.length === 0) {
+      if(slideCaption) slideCaption.textContent = "Loading photos... (Make sure pictures folder exists!)";
+    }
+  }, 2000);
+}
+
+// --- Screen 3.9: Slideshow ---
+const currentSlide = document.getElementById('currentSlide');
+const slideCaption = document.getElementById('slideCaption');
+const slideCounter = document.getElementById('slideCounter');
+const prevSlide = document.getElementById('prevSlide');
+const nextSlide = document.getElementById('nextSlide');
+const next39 = document.getElementById('next39');
+
+function showSlide(index) {
+  if(photos.length === 0) return;
+  
+  currentPhotoIndex = (index + photos.length) % photos.length;
+  const photo = photos[currentPhotoIndex];
+  
+  const placeholder = document.querySelector('.photo-placeholder');
+  
+  if(photo.type === 'emoji') {
+    if(placeholder) placeholder.textContent = photo.content;
+    if(currentSlide) currentSlide.classList.add('hidden');
+  } else {
+    if(currentSlide) {
+      currentSlide.src = photo.content;
+      currentSlide.classList.remove('hidden');
+    }
+    if(placeholder) placeholder.style.display = 'none';
+  }
+  
+  if(slideCaption) slideCaption.textContent = photo.caption;
+  if(slideCounter) slideCounter.textContent = `${currentPhotoIndex + 1} / ${photos.length}`;
+}
+
+if(prevSlide) prevSlide.addEventListener('click', ()=> showSlide(currentPhotoIndex - 1));
+if(nextSlide) nextSlide.addEventListener('click', ()=> showSlide(currentPhotoIndex + 1));
+if(next39) next39.addEventListener('click', ()=> {
+  renderPhotoGrid();
+  show('screen-3-10');
+});
+
+// Auto-advance slideshow
+let slideshowInterval;
+function startSlideshow() {
+  showSlide(0);
+  slideshowInterval = setInterval(()=> showSlide(currentPhotoIndex + 1), 3000);
+}
+
+function stopSlideshow() {
+  clearInterval(slideshowInterval);
+}
+
+// --- Screen 3.10: Photo Grid ---
+const photoGrid = document.getElementById('photoGrid');
+const next310 = document.getElementById('next310');
+
+function renderPhotoGrid() {
+  if(!photoGrid || photos.length === 0) return;
+  
+  photoGrid.innerHTML = '';
+  
+  photos.forEach((photo, index) => {
+    const gridItem = document.createElement('div');
+    gridItem.className = 'grid-item';
+    
+    if(photo.type === 'emoji') {
+      const placeholder = document.createElement('div');
+      placeholder.className = 'placeholder';
+      placeholder.textContent = photo.content;
+      gridItem.appendChild(placeholder);
+    } else {
+      const img = document.createElement('img');
+      img.src = photo.content;
+      img.alt = photo.caption;
+      gridItem.appendChild(img);
+    }
+    
+    // Click to view in slideshow
+    gridItem.addEventListener('click', ()=> {
+      currentPhotoIndex = index;
+      showScreenWithSlideshow('screen-3-9');
+    });
+    
+    photoGrid.appendChild(gridItem);
+  });
+}
+
+if(next310) next310.addEventListener('click', ()=> show('screen-4'));
+
+// Wrap show function to handle slideshow
+const originalShow = show;
+function showScreenWithSlideshow(id) {
+  show(id);
+  if(id === 'screen-3-9') {
+    startSlideshow();
+  } else {
+    stopSlideshow();
+  }
+}
 
 
 // --- Screen 4: Gift box ---
