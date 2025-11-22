@@ -97,10 +97,15 @@ function spawnHeart(){
     const msgs = ["I care about you.", "You matter to me.", "Thank you for being patient.", "You're my world.", "I'll be better."];
     const m = msgs[Math.floor(Math.random()*msgs.length)];
     const tip = document.createElement('div');
-    tip.className='small-msg visible'; tip.textContent = m; // visible immediately
-    tip.style.position='absolute'; tip.style.left=h.style.left; tip.style.top=h.style.top;
-    heartField.appendChild(tip);
-    setTimeout(()=> tip.remove(),1200);
+    tip.className='small-msg visible';
+    tip.textContent = m;
+    tip.style.position='fixed'; // Changed to fixed for better visibility
+    tip.style.left='50%';
+    tip.style.top='30%';
+    tip.style.transform='translateX(-50%)';
+    tip.style.zIndex='1000';
+    document.body.appendChild(tip); // Append to body instead of heartField
+    setTimeout(()=> tip.remove(),1500);
     popped +=1; poppedCount.textContent = popped;
     
     // Wait for animation before removing

@@ -254,6 +254,13 @@ p {
   opacity: 0;
   transform: translateY(10px);
   transition: all 0.5s ease;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 8px 12px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  white-space: nowrap;
+  z-index: 100;
+  pointer-events: none;
 }
 .small-msg.visible { opacity: 1; transform: translateY(0); }
 
@@ -293,12 +300,12 @@ input[type=range]::-webkit-slider-thumb {
 .game-area { width: 100%; }
 .heart-field {
   width: 100%;
-  height: 300px;
+  height: 400px;
   border-radius: 16px;
   background: rgba(255,255,255,0.5);
   border: 2px solid #fff;
   position: relative;
-  overflow: hidden;
+  overflow: visible; /* Allow messages to show outside */
 }
 .heart {
   position: absolute;
@@ -311,7 +318,7 @@ input[type=range]::-webkit-slider-thumb {
 }
 .heart:active { transform: scale(0.9); }
 .heart.pop { transform: scale(1.4); opacity: 0; transition: all 0.2s; }
-.game-info { font-weight: 700; color: var(--accent); font-size: 1.1rem; }
+.game-info { font-weight: 700; color: var(--accent); font-size: 1.1rem; margin-top: 16px; }
 
 /* Gift */
 .gift {
@@ -720,6 +727,6 @@ input[type=range]::-webkit-slider-thumb {
   .choice-row { flex-direction: row; flex-wrap: wrap; }
   .choice-row .btn { width: auto; flex: 1; }
   .choice-row #noBtn { flex: 0 0 auto; width: auto; min-width: 80px; } /* Let NO button be smaller to run away */
-  .heart-field { height: 240px; }
+  .heart-field { height: 350px; }
 }
 
