@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+  <title>Sorry — Babi to Chinie</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="bg-blobs">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  <main id="app">
+    <!-- 1. Wake Me Up -->
+    <section class="screen" id="screen-1">
+      <div class="center">
+        <div id="sleepy" class="character sleeping" role="button" tabindex="0" aria-label="Wake me up">
+          <div class="face">😴</div>
+        </div>
+        <div id="wakeText" class="small-msg hidden">I'm awake now... and I'm sorry. — Babi</div>
+        <button id="next1" class="btn hidden">Next ❤️</button>
+      </div>
+    </section>
+
+    <!-- 2. Drag-to-Reveal -->
+    <section class="screen hidden" id="screen-2">
+      <div class="center">
+        <h2>Slide to reveal my apology</h2>
+        <div class="slider-wrap">
+          <input type="range" id="apologySlider" min="0" max="100" value="0">
+        </div>
+        <p id="apologyText" class="apology-text hidden">Sorry for oversleeping and making you wait, Chinie. I love you — Babi.</p>
+        <button id="next2" class="btn hidden">Next</button>
+      </div>
+    </section>
+
+    <!-- 3. Heart Pop Game -->
+    <section class="screen hidden" id="screen-3">
+      <div class="center game-area">
+        <h2>Pop 5 hearts ❤️</h2>
+        <div id="heartField" class="heart-field" aria-live="polite"></div>
+        <div class="game-info">Popped: <span id="poppedCount">0</span>/5</div>
+        <button id="next3" class="btn hidden">Next</button>
+      </div>
+    </section>
+
+    <!-- 4. Gift Box Reveal -->
+    <section class="screen hidden" id="screen-4">
+      <div class="center">
+        <h2>Tap the gift</h2>
+        <div id="gift" class="gift" role="button" tabindex="0">
+          <div class="box">
+            <div class="lid"></div>
+            <div class="ribbon"></div>
+          </div>
+        </div>
+        <div id="giftMsg" class="gift-msg hidden">You deserve better... and I'll do better. — Babi</div>
+        <button id="next4" class="btn hidden">Next</button>
+      </div>
+    </section>
+
+    <!-- 5. Forgive Me? Buttons -->
+    <section class="screen hidden" id="screen-5">
+      <div class="center">
+        <h2>Forgive me, Chinie?</h2>
+        <div class="choice-row">
+          <button id="yesBtn" class="btn success">✔ YES</button>
+          <button id="noBtn" class="btn danger">✖ NO</button>
+        </div>
+        <div id="forgiveMsg" class="hidden big-msg"></div>
+      </div>
+    </section>
+
+    <!-- 6. Secret Message (Shake) -->
+    <section class="screen hidden" id="screen-6">
+      <div class="center">
+        <h2>Secret</h2>
+        <p>Shake your phone (or press <code>S</code>) to reveal a secret message for Chinie.</p>
+        <div id="secretOverlay" class="secret hidden">Even when I oversleep, I never want to lose you. — Babi</div>
+        <button id="next6" class="btn hidden">Next</button>
+      </div>
+    </section>
+
+    <!-- 7. Final Hug -->
+    <section class="screen hidden" id="screen-7">
+      <div class="center">
+        <h2>Hug me 🤗</h2>
+        <div class="hug-scene">
+          <div class="person left">😊</div>
+          <div class="person right">🥰</div>
+        </div>
+        <button id="hugBtn" class="btn">Hug me 🤗</button>
+        <div id="finalMsg" class="final hidden">Thank you for staying, Chinie. I appreciate you. — Babi 💗</div>
+      </div>
+    </section>
+
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
